@@ -4,8 +4,8 @@ import {Drawer, List, Divider, ListItem,ListItemText, Button, AppBar, Toolbar, I
 import { Link, Route, Switch } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
-import Home from './Home';
-import Reports from './Reports';
+import Home from '../home/Home';
+import Reports from '../reports/Reports';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -39,7 +39,7 @@ function App() {
   ]
   return (
 	  <div>
-	  <AppBar position="static" color="transparent">
+	  <AppBar position="static">
         <Toolbar>
       		<IconButton onClick={handleDrawerOpen} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
         		<MenuIcon />

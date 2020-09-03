@@ -1,5 +1,5 @@
 .Home {
-    background-image: url(mountain.jpg);
+    background-image: url(../../static/mountain.jpg);
     background-repeat: no-repeat;
     /* background-size:cover; */
     /* background-attachment: fixed; */

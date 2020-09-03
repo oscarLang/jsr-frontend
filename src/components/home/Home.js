@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Grid, Paper, Typography, Card, CardMedia} from '@material-ui/core';
 import './Home.css';
-import me from './me.jpg';
+import me from '../../static/me.jpg';
 function App() {
   return (
       <div id="home" className="Home">
