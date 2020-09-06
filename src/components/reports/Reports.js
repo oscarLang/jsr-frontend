@@ -2,15 +2,10 @@ import React from "react";
 import {
   Paper,
   Grid,
-  List,
   Link as MaLink,
-  ListItem,
-  ListItemText,
-  Divider,
   Typography
 } from "@material-ui/core";
 import {
-  Link,
   Route,
   Switch,
   useRouteMatch,
@@ -27,7 +22,7 @@ function Week() {
           text: Week1,
       }
   ]
-  let thisReport = reports.find(week => week.number == number) ?? "none";
+  let thisReport = reports.find(week => week.number === number) ?? "none";
   return (
     <div>
         <Typography variant="h3">
