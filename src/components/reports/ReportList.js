@@ -8,22 +8,16 @@ function ReportList() {
       <Grid item xs={12} sm={4}>
         <Paper>
             <List>
-            <Link to="/reports/week">
-                <ListItem button key="0">
+                <ListItem button component={Link} to="/reports/week" key="0">
                     <ListItemText primary="Reports" />
                 </ListItem>
-            </Link>
-            <Divider />
-            <Link to={`${url}/1`}>
-                <ListItem button key="1">
+                <Divider />
+                <ListItem component={Link} to={`${url}/1`} button key="1">
                     <ListItemText primary="Week 1" />
                 </ListItem>
-            </Link>
-            <Link to={`${url}/2`}>
-                <ListItem button key="2">
+                <ListItem component={Link} to={`${url}/2`} button key="2">
                     <ListItemText primary="Week 2" />
                 </ListItem>
-            </Link>
             </List>
         </Paper>
       </Grid>

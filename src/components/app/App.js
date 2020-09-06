@@ -47,19 +47,14 @@ function App() {
       		<Typography variant="h6" className={classes.title}>
         		JSRamverk
       		</Typography>
-            <Button color="inherit">Login</Button>
-            <Button color="inherit">Login</Button>
-      		<Button color="inherit">Login</Button>
     	</Toolbar>
   	  </AppBar>
       <Drawer variant="temporary" open={drawer} onClose={handleDrawerClose}>
 		  <List>
 	        {views.map((view, index) => (
-				<Link to={view.route}>
-	          		<ListItem button key={view.name}>
-	            		<ListItemText primary={view.name} />
-	          		</ListItem>
-			  	</Link>
+          		<ListItem button component={ Link } to={view.route} key={view.name}>
+            		<ListItemText inset dense primary={view.name} />
+          		</ListItem>
 	        ))}
 	      </List>
 	  </Drawer>

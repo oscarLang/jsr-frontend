@@ -38,6 +38,18 @@ function Week() {
     </div>
   );
 }
+function Info() {
+  return (
+    <div>
+        <Typography variant="h3">
+            Reports
+        </Typography>
+        <Typography variant="subtitle1">
+            This section will feature some research questions that will be updated each week.
+        </Typography>
+    </div>
+  );
+}
 function Reports({ match }) {
   console.log(match);
   let { path, url } = useRouteMatch();
@@ -49,6 +61,7 @@ function Reports({ match }) {
       <Grid item xs={12} sm={8}>
         <Paper>
           <Switch>
+            <Route exact path="/reports/week" children={<Info />} />
             <Route path="/reports/week/:number" children={<Week />} />
           </Switch>
         </Paper>
