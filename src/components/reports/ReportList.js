@@ -1,7 +1,6 @@
 import React from "react";
 import { Paper, Grid, List, ListItem, ListItemText, Divider } from "@material-ui/core";
 import { Link, Route, Switch, useRouteMatch, useParams } from 'react-router-dom';
-
 function ReportList() {
   let { path, url } = useRouteMatch();
   return (

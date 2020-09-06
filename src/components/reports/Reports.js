@@ -3,6 +3,7 @@ import {
   Paper,
   Grid,
   List,
+  Link as MaLink,
   ListItem,
   ListItemText,
   Divider,
@@ -16,14 +17,14 @@ import {
   useParams,
 } from "react-router-dom";
 import ReportList from "./ReportList";
+import Week1 from "./Week1"
 function Week() {
   let { number } = useParams();
-  console.log(number);
   const reports = [
       {
           number: "1",
           title: "Report week 1",
-          text: "balaslald"
+          text: Week1,
       }
   ]
   let thisReport = reports.find(week => week.number == number) ?? "none";
@@ -32,8 +33,12 @@ function Week() {
         <Typography variant="h3">
             {thisReport.title}
         </Typography>
-        <Typography variant="subtitle1">
-            {thisReport.text}
+        <Typography variant="h4">
+        <MaLink href="https://github.com/oscarLang/jsr-frontend">
+            Github link
+        </MaLink>
+        </Typography>
+        <Typography variant="subtitle1" component={thisReport.text}>
         </Typography>
     </div>
   );
@@ -43,9 +48,6 @@ function Info() {
     <div>
         <Typography variant="h3">
             Reports
-        </Typography>
-        <Typography variant="subtitle1">
-            This section will feature some research questions that will be updated each week.
         </Typography>
     </div>
   );
