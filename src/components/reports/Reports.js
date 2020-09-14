@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Cookies from 'js-cookie'
 import Markdown from "markdown-to-jsx";
 import axios from "axios";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -27,6 +28,7 @@ import CreateReport from "./CreateReport";
 import UpdateReport from "./UpdateReport";
 function Week(props) {
     const history = useHistory();
+    const isLoggedIn = Cookies.get("jwt") || false;
   const [weekData, changeWeek] = React.useState({
     data: "###Report has not been created yet",
     created: false,
@@ -73,7 +75,7 @@ function Week(props) {
   }
   return (
     <div>
-      {weekData.created && (
+      {weekData.created && isLoggedIn && (
         <Grid item xs={12}>
           <Button
             size="small"

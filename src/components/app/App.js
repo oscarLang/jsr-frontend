@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Cookies from 'js-cookie'
 import {
   Drawer,
   List,
@@ -9,9 +10,11 @@ import {
   Toolbar,
   IconButton,
   Typography,
+  Divider
 } from "@material-ui/core";
 import { Link, Route, Switch } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+
 import "./App.css";
 import Home from "../home/Home";
 import Login from "../user/Login";
@@ -32,30 +35,13 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [drawer, setOpen] = React.useState(false);
+  const isLoggedIn = Cookies.get("jwt") || false;
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const views = [
-    {
-      name: "Home",
-      route: "/",
-    },
-    {
-      name: "Register",
-      route: "/register",
-    },
-    {
-      name: "Login",
-      route: "/login",
-    },
-    {
-      name: "Reports",
-      route: "/reports/week",
-    },
-  ];
   return (
     <div>
       <AppBar position="static">
@@ -76,11 +62,25 @@ function App() {
       </AppBar>
       <Drawer variant="temporary" open={drawer} onClose={handleDrawerClose}>
         <List>
-          {views.map((view, index) => (
-            <ListItem button component={Link} to={view.route} key={view.name}>
-              <ListItemText inset dense primary={view.name} />
+            <ListItem button component={Link} to="/" key="home">
+                <ListItemText inset dense primary="Home"/>
             </ListItem>
-          ))}
+            <ListItem button component={Link} to="/reports/week" key="reports">
+                <ListItemText inset dense primary="Reports"/>
+            </ListItem>
+            <Divider />
+            {
+                isLoggedIn === false &&
+                (<ListItem button component={Link} to="/login" key="login">
+                    <ListItemText inset dense primary="Log in"/>
+                </ListItem>)
+            }
+            {
+                isLoggedIn === false &&
+                (<ListItem button component={Link} to="/register" key="register">
+                    <ListItemText inset dense primary="Register"/>
+                </ListItem>)
+            }
         </List>
       </Drawer>
       <Switch>
