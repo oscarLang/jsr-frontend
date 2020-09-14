@@ -42,6 +42,10 @@ function App() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  function logout(event) {
+      Cookies.remove("jwt");
+      setOpen(false);
+  }
   return (
     <div>
       <AppBar position="static">
@@ -63,22 +67,28 @@ function App() {
       <Drawer variant="temporary" open={drawer} onClose={handleDrawerClose}>
         <List>
             <ListItem button component={Link} to="/" key="home">
-                <ListItemText inset dense primary="Home"/>
+                <ListItemText inset primary="Home"/>
             </ListItem>
             <ListItem button component={Link} to="/reports/week" key="reports">
-                <ListItemText inset dense primary="Reports"/>
+                <ListItemText inset primary="Reports"/>
             </ListItem>
             <Divider />
             {
                 isLoggedIn === false &&
                 (<ListItem button component={Link} to="/login" key="login">
-                    <ListItemText inset dense primary="Log in"/>
+                    <ListItemText inset primary="Log in"/>
                 </ListItem>)
             }
             {
                 isLoggedIn === false &&
                 (<ListItem button component={Link} to="/register" key="register">
-                    <ListItemText inset dense primary="Register"/>
+                    <ListItemText inset primary="Register"/>
+                </ListItem>)
+            }
+            {
+                isLoggedIn &&
+                (<ListItem button component={Link} to="/" key="logout" onClick={logout}>
+                    <ListItemText inset primary="Log out"/>
                 </ListItem>)
             }
         </List>
