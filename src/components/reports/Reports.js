@@ -26,6 +26,8 @@ import {
 import ReportList from "./ReportList";
 import CreateReport from "./CreateReport";
 import UpdateReport from "./UpdateReport";
+import "./Report.css";
+
 function Week(props) {
     const history = useHistory();
     const isLoggedIn = Cookies.get("jwt") || false;
@@ -113,7 +115,7 @@ function Reports({ match }) {
   let { path, url } = useRouteMatch();
   const isLoggedIn = Cookies.get("jwt") || false;
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} className="Report-main">
       <Grid item xs={12} sm={4}>
         <Paper>
           <List>
@@ -149,7 +151,7 @@ function Reports({ match }) {
         </Paper>
       </Grid>
       <Grid item xs={12} sm={8}>
-        <Paper>
+        <Paper className="Report-paper">
           <Switch>
             <Route exact path="/reports/week" children={<Info />} />
             <Route
