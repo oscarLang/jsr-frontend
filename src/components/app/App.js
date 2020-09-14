@@ -14,6 +14,8 @@ import { Link, Route, Switch } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import "./App.css";
 import Home from "../home/Home";
+import Login from "../user/Login";
+import Register from "../user/Register";
 import Reports from "../reports/Reports";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +42,14 @@ function App() {
     {
       name: "Home",
       route: "/",
+    },
+    {
+      name: "Register",
+      route: "/register",
+    },
+    {
+      name: "Login",
+      route: "/login",
     },
     {
       name: "Reports",
@@ -75,6 +85,8 @@ function App() {
       </Drawer>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
         <Route path="/reports/week" component={Reports} />
       </Switch>
     </div>

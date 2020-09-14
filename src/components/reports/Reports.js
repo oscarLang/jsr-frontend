@@ -1,65 +1,166 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Markdown from "markdown-to-jsx";
+import axios from "axios";
+import DeleteIcon from "@material-ui/icons/Delete";
+import UpdateIcon from "@material-ui/icons/Update";
 import {
   Paper,
   Grid,
   Link as MaLink,
-  Typography
+  Typography,
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
+  Button,
 } from "@material-ui/core";
 import {
   Route,
+  Link,
   Switch,
   useRouteMatch,
   useParams,
+  useHistory
 } from "react-router-dom";
 import ReportList from "./ReportList";
-import Week1 from "./Week1"
-function Week() {
+import CreateReport from "./CreateReport";
+import UpdateReport from "./UpdateReport";
+function Week(props) {
+    const history = useHistory();
+  const [weekData, changeWeek] = React.useState({
+    data: "###Report has not been created yet",
+    created: false,
+  });
   let { number } = useParams();
-  const reports = [
-      {
-          number: "1",
-          title: "Report week 1",
-          text: Week1,
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await axios(
+          "http://localhost:1337/reports/week/" + String(number)
+        );
+        console.log(result);
+        console.log(result.data.data.text);
+        changeWeek({
+          data: result.data.data.text,
+          created: true,
+        });
+        console.log(weekData);
+      } catch (error) {
+        changeWeek({
+          data: "###Report has not been created yet",
+          created: false,
+        });
+        console.log("no data");
       }
-  ]
-  let thisReport = reports.find(week => week.number === number) ?? "none";
+    };
+    fetchData();
+  }, [number]);
+  function deleteReport(event) {
+      event.preventDefault();
+      axios({
+        method: 'delete',
+        url: 'http://localhost:1337/reports',
+        data: {
+          week: number,
+        }
+    })
+    .then(function (response) {
+        console.log(response);
+        history.push("/reports/week");
+    });
+  }
+  function updateReport(event) {
+      history.push("/reports/week/update/" + String(number));
+  }
   return (
     <div>
-        <Typography variant="h3">
-            {thisReport.title}
-        </Typography>
-        <Typography variant="h4">
-        <MaLink href="https://github.com/oscarLang/jsr-frontend">
-            Github link
-        </MaLink>
-        </Typography>
-        <Typography variant="subtitle1" component={thisReport.text}>
-        </Typography>
+      {weekData.created && (
+        <Grid item xs={12}>
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            onClick={updateReport}
+            startIcon={<UpdateIcon />}
+          >
+            Update
+          </Button>
+          <Button
+            size="small"
+            onClick={deleteReport}
+            variant="contained"
+            color="secondary"
+            startIcon={<DeleteIcon />}
+          >
+            Delete
+          </Button>
+        </Grid>
+      )}
+      <Markdown children={weekData.data} />
     </div>
   );
 }
 function Info() {
   return (
     <div>
-        <Typography variant="h3">
-            Reports
-        </Typography>
+      <Typography variant="h3">Reports</Typography>
     </div>
   );
 }
+
 function Reports({ match }) {
-  console.log(match);
   let { path, url } = useRouteMatch();
-  console.log(path);
-  console.log(url);
   return (
     <Grid container spacing={3}>
-      <ReportList />
+      <Grid item xs={12} sm={4}>
+        <Paper>
+          <List>
+            <ListItem button component={Link} to="/reports/week" key="0">
+              <ListItemText primary="Reports" />
+            </ListItem>
+            <Divider />
+            <ListItem component={Link} to={`${url}/1`} button key="1">
+              <ListItemText primary="Week 1" />
+            </ListItem>
+            <ListItem component={Link} to={`${url}/2`} button key="2">
+              <ListItemText primary="Week 2" />
+            </ListItem>
+            <ListItem component={Link} to={`${url}/3`} button key="3">
+              <ListItemText primary="Week 3" />
+            </ListItem>
+            <ListItem component={Link} to={`${url}/4`} button key="4">
+              <ListItemText primary="Week 4" />
+            </ListItem>
+            <ListItem component={Link} to={`${url}/5`} button key="5">
+              <ListItemText primary="Week 5" />
+            </ListItem>
+            <ListItem component={Link} to={`${url}/6`} button key="6">
+              <ListItemText primary="Week 6" />
+            </ListItem>
+            <Divider />
+            <ListItem button component={Link} to="/reports/week/create" key="7">
+              <ListItemText primary="Create new report" />
+            </ListItem>
+          </List>
+        </Paper>
+      </Grid>
       <Grid item xs={12} sm={8}>
         <Paper>
           <Switch>
             <Route exact path="/reports/week" children={<Info />} />
-            <Route path="/reports/week/:number" children={<Week />} />
+            <Route
+              exact
+              path="/reports/week/create"
+              children={<CreateReport />}
+            />
+            <Route
+              path="/reports/week/update/:number"
+              children={<UpdateReport />}
+            />
+            <Route
+              path="/reports/week/:number"
+              children={<Week text="test" />}
+            />
           </Switch>
         </Paper>
       </Grid>
