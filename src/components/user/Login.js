@@ -12,7 +12,12 @@ import {
   Link,
 } from "@material-ui/core";
 
+import {
+  useHistory
+} from "react-router-dom";
+
 function Login() {
+    const history = useHistory();
     const [form, changeForm] = React.useState({
       email: "",
       password: "",
@@ -37,6 +42,7 @@ function Login() {
     })
     .then(function (response) {
         console.log(response);
+        history.push("/")
     });
 
     }

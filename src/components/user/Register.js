@@ -9,8 +9,12 @@ import {
   Button,
   Link,
 } from "@material-ui/core";
+import {
+  useHistory
+} from "react-router-dom";
 // import "./Home.css";
 function Register() {
+    const history = useHistory();
   const [form, changeForm] = React.useState({
     userName: "",
     email: "",
@@ -35,6 +39,9 @@ function Register() {
         email: form.email,
         password: form.password
       }
+    }).then(function (response) {
+        console.log(response);
+        history.push("/")
     });
   }
 
