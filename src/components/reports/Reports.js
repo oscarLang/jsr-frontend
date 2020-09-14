@@ -111,6 +111,7 @@ function Info() {
 
 function Reports({ match }) {
   let { path, url } = useRouteMatch();
+  const isLoggedIn = Cookies.get("jwt") || false;
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={4}>
@@ -139,9 +140,11 @@ function Reports({ match }) {
               <ListItemText primary="Week 6" />
             </ListItem>
             <Divider />
-            <ListItem button component={Link} to="/reports/week/create" key="7">
-              <ListItemText primary="Create new report" />
-            </ListItem>
+            { isLoggedIn &&
+                <ListItem button component={Link} to="/reports/week/create" key="7">
+                <ListItemText primary="Create new report" />
+                </ListItem>
+            }
           </List>
         </Paper>
       </Grid>
