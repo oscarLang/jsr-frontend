@@ -25,7 +25,8 @@ function UpdateReport() {
       const fetchData = async () => {
         try {
           const result = await axios(
-            "http://localhost:1337/reports/week/" + String(number)
+            "http://localhost:1337/reports/week/" + String(number),
+            {withCredentials: true}
           );
           console.log(result);
           changeForm({
@@ -49,6 +50,7 @@ function UpdateReport() {
         axios({
             method: 'put',
             url: 'http://localhost:1337/reports',
+            withCredentials: true,
             data: {
               week: reportForm.week,
               text: reportForm.text
@@ -78,7 +80,7 @@ function UpdateReport() {
           </Grid>
         </Grid>
         <Button type="submit" fullWidth variant="contained" color="primary">
-          Submit report
+          Update report
         </Button>
       </form>
   );

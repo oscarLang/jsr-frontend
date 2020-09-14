@@ -31,6 +31,7 @@ function CreateReport() {
         axios({
             method: 'post',
             url: 'http://localhost:1337/reports',
+            withCredentials: true,
             data: {
               week: reportForm.week,
               text: reportForm.text

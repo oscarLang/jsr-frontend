@@ -36,15 +36,13 @@ function Week(props) {
     const fetchData = async () => {
       try {
         const result = await axios(
-          "http://localhost:1337/reports/week/" + String(number)
+          "http://localhost:1337/reports/week/" + String(number),
+          {withCredentials: true }
         );
-        console.log(result);
-        console.log(result.data.data.text);
         changeWeek({
           data: result.data.data.text,
           created: true,
         });
-        console.log(weekData);
       } catch (error) {
         changeWeek({
           data: "###Report has not been created yet",
@@ -59,6 +57,7 @@ function Week(props) {
       event.preventDefault();
       axios({
         method: 'delete',
+        withCredentials: true,
         url: 'http://localhost:1337/reports',
         data: {
           week: number,

@@ -28,6 +28,8 @@ function Login() {
       axios({
         method: 'post',
         url: 'http://localhost:1337/user/login',
+        withCredentials: true,
+        credentials: 'include',
         data: {
           email: form.email,
           password: form.password
