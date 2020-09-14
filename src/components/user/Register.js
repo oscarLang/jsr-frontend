@@ -4,8 +4,6 @@ import {
   Grid,
   Typography,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Button,
   Link,
 } from "@material-ui/core";

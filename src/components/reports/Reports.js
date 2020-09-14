@@ -7,7 +7,6 @@ import UpdateIcon from "@material-ui/icons/Update";
 import {
   Paper,
   Grid,
-  Link as MaLink,
   Typography,
   List,
   ListItem,
@@ -23,7 +22,6 @@ import {
   useParams,
   useHistory
 } from "react-router-dom";
-import ReportList from "./ReportList";
 import CreateReport from "./CreateReport";
 import UpdateReport from "./UpdateReport";
 import "./Report.css";
@@ -112,7 +110,7 @@ function Info() {
 }
 
 function Reports({ match }) {
-  let { path, url } = useRouteMatch();
+  let {url } = useRouteMatch();
   const isLoggedIn = Cookies.get("jwt") || false;
   return (
     <Grid container spacing={3} className="Report-main">

@@ -2,12 +2,8 @@ import React from "react";
 import axios from 'axios';
 import {
   Grid,
-  Typography,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Button,
-  Link,
   MenuItem
 } from "@material-ui/core";
 import {

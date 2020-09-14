@@ -6,8 +6,6 @@ import {
   Typography,
   Avatar,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Button,
   Link,
 } from "@material-ui/core";
