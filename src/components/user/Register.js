@@ -34,8 +34,9 @@ function Register() {
       method: 'post',
       url: 'http://localhost:1337/user/register',
       data: {
-        email: form.email,
-        password: form.password
+          username: form.userName,
+          email: form.email,
+          password: form.password
       }
     }).then(function (response) {
         console.log(response);
@@ -146,7 +147,7 @@ function Register() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

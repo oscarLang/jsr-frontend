@@ -19,6 +19,7 @@ function Login() {
     const [form, changeForm] = React.useState({
       email: "",
       password: "",
+      logInFail: false
     });
     function change(event) {
         var name = event.target.name;
@@ -41,6 +42,10 @@ function Login() {
     .then(function (response) {
         console.log(response);
         history.push("/")
+    })
+    .catch(function(err) {
+        console.log(err);
+        changeForm({ ...form, ["logInFail"]: true });
     });
 
     }
@@ -52,6 +57,11 @@ function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          { form.logInFail &&
+              <Typography color="secondary" component="h1" variant="h5">
+              Log in failed
+              </Typography>
+          }
           <form onSubmit={loginUser}>
             <TextField
               variant="outlined"
@@ -84,7 +94,7 @@ function Login() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
