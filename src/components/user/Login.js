@@ -31,7 +31,7 @@ function Login() {
       event.preventDefault();
       axios({
         method: 'post',
-        url: 'http://localhost:1337/user/login',
+        url: process.env.REACT_APP_API + '/user/login',
         withCredentials: true,
         credentials: 'include',
         data: {
@@ -40,6 +40,7 @@ function Login() {
         }
     })
     .then(function (response) {
+        
         console.log(response);
         history.push("/")
     })

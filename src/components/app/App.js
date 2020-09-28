@@ -43,6 +43,8 @@ function App() {
     setOpen(false);
   };
   function logout(event) {
+      var test = Cookies.get("jwt");
+      console.log(test);
       Cookies.remove("jwt");
       setOpen(false);
   }

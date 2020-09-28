@@ -32,7 +32,8 @@ function Register() {
     event.preventDefault();
     axios({
       method: 'post',
-      url: 'http://localhost:1337/user/register',
+      url: process.env.REACT_APP_API + '/user/register',
+      withCredentials: true,
       data: {
           username: form.userName,
           email: form.email,

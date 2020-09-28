@@ -38,7 +38,7 @@ function Week(props) {
     const fetchData = async () => {
       try {
         const result = await axios(
-          "http://localhost:1337/reports/week/" + String(number),
+          process.env.REACT_APP_API + "/reports/week/" + String(number),
           {withCredentials: true }
         );
         changeWeek({
@@ -60,7 +60,7 @@ function Week(props) {
       axios({
         method: 'delete',
         withCredentials: true,
-        url: 'http://localhost:1337/reports',
+        url: process.env.REACT_APP_API + '/reports',
         data: {
           week: number,
         }

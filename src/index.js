@@ -4,7 +4,11 @@ import "./index.css";
 import App from "./components/app/App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
-
+console.log(process.env.production);
+// process.env.MY_VARIABLE = 'ahoy';
+if (process.env.NODE_ENV === 'production') {
+    console.log("prod");
+}
 ReactDOM.render(
   <BrowserRouter>
     <App />

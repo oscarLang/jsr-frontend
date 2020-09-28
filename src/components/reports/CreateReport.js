@@ -26,7 +26,7 @@ function CreateReport() {
         console.log(reportForm);
         axios({
             method: 'post',
-            url: 'http://localhost:1337/reports',
+            url: process.env.REACT_APP_API + '/reports',
             withCredentials: true,
             data: {
               week: reportForm.week,
