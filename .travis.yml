@@ -13,8 +13,6 @@ git:
 addons:
     chrome: stable
 
-dist: trusty
-
 services:
     - xvfb
 
@@ -22,12 +20,8 @@ git:
     submodules: false
 
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
-  - rackup  # start a Web server
-  - sleep 3 # give Web server some time to bind to sockets, etc
-  - npm install
-
+    - export DISPLAY=':99.0'
+    - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+    - npm install
 script:
     - npm test
