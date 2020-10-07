@@ -91,7 +91,7 @@ describe('Login and reports', function() {
 
     await driver.wait(
         until.elementLocated(By.id("createReport")),
-        5000
+        20000
     );
     await driver.findElement(By.id("createReport")).click()
 
