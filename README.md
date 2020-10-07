@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/oscarLang/jsr-frontend.svg?branch=master)](https://travis-ci.org/oscarLang/jsr-frontend)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/oscarLang/jsr-frontend/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/oscarLang/jsr-frontend/?branch=master)[![Build Status](https://scrutinizer-ci.com/g/oscarLang/jsr-frontend/badges/build.png?b=master)](https://scrutinizer-ci.com/g/oscarLang/jsr-frontend/build-status/master)
 ## Available Scripts
 In the project directory, you can run:
 
