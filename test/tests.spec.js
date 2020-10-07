@@ -89,10 +89,6 @@ describe('Login and reports', function() {
     await driver.findElement(By.linkText("Reports")).click()
     await driver.findElement(By.css(".MuiBackdrop-root")).click()
 
-    await driver.wait(
-        until.elementLocated(By.id("createReport")),
-        5000
-    );
     await driver.findElement(By.id("createReport")).click()
 
     await driver.findElement(By.id("week")).click();
