@@ -1,0 +1,22 @@
+language: node_js
+
+node_js:
+    - "node"
+    - "lts/*"
+    - "11"
+    - "10"
+
+sudo: false
+
+git:
+    submodules: false
+
+dist: xenial
+addons:
+  chrome: stable
+before_install:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - npm install
+
+script:
+    - npm test
