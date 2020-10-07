@@ -59,7 +59,7 @@ describe('Login and reports', function() {
     await driver.manage().window().setRect(794, 824)
     await driver.findElement(By.css(".MuiSvgIcon-root")).click()
     await driver.wait(
-        until.elementLocated(By.css(".MuiButtonBase-root:nth-child(4) > .MuiListItemText-root")),
+        until.elementLocated(By.css(".MuiList-root")),
         5000
     );
     await driver.findElement(By.css(".MuiButtonBase-root:nth-child(4) > .MuiListItemText-root")).click()
