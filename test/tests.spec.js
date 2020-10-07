@@ -11,6 +11,7 @@ describe('Login and reports', function() {
     vars = {}
   })
   afterEach(async function() {
+    await driver.manage().deleteAllCookies();
     await driver.quit();
   })
   it('Look at report for week 1', async function() {
