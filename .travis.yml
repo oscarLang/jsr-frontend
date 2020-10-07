@@ -6,7 +6,7 @@ node_js:
     - "11"
     - "10"
 
-sudo: false
+sudo: required
 
 git:
     submodules: false
@@ -17,8 +17,13 @@ addons:
   chrome: stable
 
 before_install:
+  - sudo apt-get update
+  - sudo apt-get install chromium-chromedriver
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - npm install
+
+before_script:
+  - export PATH=$PATH:/usr/lib/chromium-browser/
 
 script:
     - npm test
