@@ -55,7 +55,7 @@ function CreateReport() {
             onChange={change}
           >
             {weeks.map((week) => (
-                <MenuItem key={week} value={week}>
+                <MenuItem key={week} value={week} id={"week" + week}>
                     {week}
                 </MenuItem>
             ))}

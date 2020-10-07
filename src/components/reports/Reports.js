@@ -78,6 +78,7 @@ function Week(props) {
       {weekData.created && isLoggedIn && (
         <Grid item xs={12}>
           <Button
+            id="updateReport"
             size="small"
             variant="contained"
             color="primary"
@@ -87,6 +88,7 @@ function Week(props) {
             Update
           </Button>
           <Button
+            id="deleteReport"
             size="small"
             onClick={deleteReport}
             variant="contained"
@@ -97,7 +99,7 @@ function Week(props) {
           </Button>
         </Grid>
       )}
-      <Markdown children={weekData.data} />
+      <Markdown id="textData" children={weekData.data} />
     </div>
   );
 }
@@ -121,28 +123,28 @@ function Reports({ match }) {
               <ListItemText primary="Reports" />
             </ListItem>
             <Divider />
-            <ListItem component={Link} to={`${url}/1`} button key="1">
+            <ListItem component={Link} to={`${url}/1`} button id="week1" key="1">
               <ListItemText primary="Week 1" />
             </ListItem>
-            <ListItem component={Link} to={`${url}/2`} button key="2">
+            <ListItem component={Link} to={`${url}/2`} button id="week2" key="2">
               <ListItemText primary="Week 2" />
             </ListItem>
-            <ListItem component={Link} to={`${url}/3`} button key="3">
+            <ListItem component={Link} to={`${url}/3`} button id="week3" key="3">
               <ListItemText primary="Week 3" />
             </ListItem>
-            <ListItem component={Link} to={`${url}/4`} button key="4">
+            <ListItem component={Link} to={`${url}/4`} button id="week4" key="4">
               <ListItemText primary="Week 4" />
             </ListItem>
-            <ListItem component={Link} to={`${url}/5`} button key="5">
+            <ListItem component={Link} to={`${url}/5`} button id="week5" key="5">
               <ListItemText primary="Week 5" />
             </ListItem>
-            <ListItem component={Link} to={`${url}/6`} button key="6">
+            <ListItem component={Link} to={`${url}/6`} button id="week6" key="6">
               <ListItemText primary="Week 6" />
             </ListItem>
             <Divider />
             { isLoggedIn &&
-                <ListItem button component={Link} to="/reports/week/create" key="7">
-                <ListItemText primary="Create new report" />
+                <ListItem id="createReport" button component={Link} to="/reports/week/create" key="7">
+                    <ListItemText primary="Create new report" />
                 </ListItem>
             }
           </List>

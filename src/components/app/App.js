@@ -58,6 +58,7 @@ function App() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            id="drawerOpenIcon"
           >
             <MenuIcon />
           </IconButton>
@@ -68,28 +69,28 @@ function App() {
       </AppBar>
       <Drawer variant="temporary" open={drawer} onClose={handleDrawerClose}>
         <List>
-            <ListItem button component={Link} to="/" key="home">
+            <ListItem id="homeClick" button component={Link} to="/" key="home">
                 <ListItemText inset primary="Home"/>
             </ListItem>
-            <ListItem button component={Link} to="/reports/week" key="reports">
+            <ListItem id="reportClick" button component={Link} to="/reports/week" key="reports">
                 <ListItemText inset primary="Reports"/>
             </ListItem>
             <Divider />
             {
                 isLoggedIn === false &&
-                (<ListItem button component={Link} to="/login" key="login">
+                (<ListItem id="login" button component={Link} to="/login" key="login">
                     <ListItemText inset primary="Log in"/>
                 </ListItem>)
             }
             {
                 isLoggedIn === false &&
-                (<ListItem button component={Link} to="/register" key="register">
+                (<ListItem id="register" button component={Link} to="/register" key="register">
                     <ListItemText inset primary="Register"/>
                 </ListItem>)
             }
             {
                 isLoggedIn &&
-                (<ListItem button component={Link} to="/" key="logout" onClick={logout}>
+                (<ListItem id="logout" button component={Link} to="/" key="logout" onClick={logout}>
                     <ListItemText inset primary="Log out"/>
                 </ListItem>)
             }
