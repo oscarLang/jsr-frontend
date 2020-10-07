@@ -6,7 +6,7 @@ node_js:
     - "11"
     - "10"
 
-sudo: required
+sudo: false
 
 git:
     submodules: false
@@ -17,21 +17,11 @@ addons:
   chrome: stable
 
 before_install:
+  - wget http://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip
+  - unzip ~/chromedriver_linux64.zip -d ~/chromedriver
+  - export PATH=$PATH:$PWD/chromedriver
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - npm install
-
-install:
-  - wget -N http://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip -P ~/
-  - unzip ~/chromedriver_linux64.zip -d ~/
-  - rm ~/chromedriver_linux64.zip
-  - sudo mv -f ~/chromedriver /usr/local/share/
-  - sudo chmod +x /usr/local/share/chromedriver
-  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
-
-before_script:
-  - export PATH=$PATH:/usr/local/bin/chromedriver
-
-
 
 script:
   - whereis google-chrome-stable
