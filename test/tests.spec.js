@@ -22,7 +22,11 @@ describe('Login and reports', function() {
       await driver.actions({ bridge: true }).move(element).perform()
     }
     await driver.findElement(By.css(".MuiSvgIcon-root")).click()
-    await driver.findElement(By.id("reportClick")).click()
+    await driver.wait(
+        until.elementLocated(By.linkText("Reports")),
+        5000
+    );
+    await driver.findElement(By.linkText("Reports")).click()
     await driver.findElement(By.css(".MuiBackdrop-root")).click()
     await driver.findElement(By.css("#week1")).click();
     await driver.wait(
@@ -59,10 +63,10 @@ describe('Login and reports', function() {
     await driver.manage().window().setRect(794, 824)
     await driver.findElement(By.css(".MuiSvgIcon-root")).click()
     await driver.wait(
-        until.elementLocated(By.css(".MuiList-root")),
+        until.elementLocated(By.linkText("Log in")),
         5000
     );
-    await driver.findElement(By.id("login")).click()
+    await driver.findElement(By.linkText("Log in")).click()
     await driver.findElement(By.css(".MuiBackdrop-root")).click()
     await driver.findElement(By.id("email")).click()
     await driver.findElement(By.id("email")).sendKeys("e2e@test.com")
