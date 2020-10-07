@@ -82,13 +82,19 @@ describe('Login and reports', function() {
       await driver.actions({ bridge: true }).move(element).perform()
     }
     await driver.findElement(By.css(".MuiSvgIcon-root")).click()
-    {
-      const element = await driver.findElement(By.css("body"))
-      await driver.actions({ bridge: true }).move(element, 0, 0).perform()
-    }
-    await driver.findElement(By.css(".MuiButtonBase-root:nth-child(2) > .MuiListItemText-root")).click()
+    await driver.wait(
+        until.elementLocated(By.linkText("Reports")),
+        5000
+    );
+    await driver.findElement(By.linkText("Reports")).click()
     await driver.findElement(By.css(".MuiBackdrop-root")).click()
-    await driver.findElement(By.css(".MuiButtonBase-root:nth-child(10) .MuiTypography-root")).click()
+
+    await driver.wait(
+        until.elementLocated(By.linkText("Create new report")),
+        5000
+    );
+    await driver.findElement(By.linkText("Create new report")).click()
+
     await driver.findElement(By.id("week")).click();
     {
         const element = await driver.findElement(By.xpath("//*[normalize-space(text()) = '6']"));
