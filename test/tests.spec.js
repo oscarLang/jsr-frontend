@@ -107,7 +107,7 @@ describe('Login and reports', function() {
     await driver.findElement(By.id("text")).sendKeys("TEST")
     await driver.findElement(By.css(".MuiButton-label")).click();
     await driver.wait(
-        until.elementLocated(By.id("textData")),
+        until.elementLocated(By.id("deleteReport")),
         5000
     );
     const element = await driver.findElement(By.id("textData"));
