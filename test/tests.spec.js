@@ -58,6 +58,10 @@ describe('Login and reports', function() {
     await driver.get("https://oscarlang.me/")
     await driver.manage().window().setRect(794, 824)
     await driver.findElement(By.css(".MuiSvgIcon-root")).click()
+    await driver.wait(
+        until.elementLocated(By.css(".MuiButtonBase-root:nth-child(4) > .MuiListItemText-root")),
+        5000
+    );
     await driver.findElement(By.css(".MuiButtonBase-root:nth-child(4) > .MuiListItemText-root")).click()
     await driver.findElement(By.css(".MuiBackdrop-root")).click()
     await driver.findElement(By.id("email")).click()
