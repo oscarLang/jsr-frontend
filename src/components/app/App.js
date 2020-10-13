@@ -20,6 +20,7 @@ import Home from "../home/Home";
 import Login from "../user/Login";
 import Register from "../user/Register";
 import Reports from "../reports/Reports";
+import Chat from "../chat/Chat";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -75,6 +76,9 @@ function App() {
             <ListItem id="reportClick" button component={Link} to="/reports/week" key="reports">
                 <ListItemText inset primary="Reports"/>
             </ListItem>
+            <ListItem id="chatClick" button component={Link} to="/chat" key="chat">
+                <ListItemText inset primary="Chat"/>
+            </ListItem>
             <Divider />
             {
                 isLoggedIn === false &&
@@ -100,6 +104,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/chat" component={Chat} />
         <Route path="/reports/week" component={Reports} />
       </Switch>
     </div>
