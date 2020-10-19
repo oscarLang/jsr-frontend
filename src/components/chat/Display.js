@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from 'axios';
 import {
   Grid,
   Typography,
@@ -14,6 +15,7 @@ import {
 } from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import "./Display.css";
+import Message from "./Message"
 
 function Display({nick, socket}) {
     const [messages, addMessage] = React.useState([]);
@@ -21,7 +23,28 @@ function Display({nick, socket}) {
     const [newMessage, changeMessage] = React.useState({
       text: "",
     });
-
+    useEffect(() => {
+        axios({
+            method: 'get',
+            url: process.env.REACT_APP_API + '/chat'
+        })
+        .then(function (response) {
+            console.log(response.data);
+            response.data.slice(0).reverse().map(function(oldMessage) {
+                if (oldMessage._id) {
+                    oldMessage.id = oldMessage._id;
+                }
+                oldMessage.old = true;
+                addMessage(messages => [ ...messages, oldMessage]);
+            });
+            let systemMessage = {
+                id: "newerMessages",
+                text: "Newer messages",
+                user: "System"
+            };
+            addMessage(messages => [ ...messages, systemMessage]);
+        });
+    }, []);
     useEffect(() => {
         socket.on("chat message", obj => {
             addMessage(messages => [ ...messages, obj]);
@@ -45,36 +68,36 @@ function Display({nick, socket}) {
                 text: newMessage.text,
                 user: nick
             };
-            console.log(obj);
             socket.emit('chat message', obj);
             changeMessage({ ...newMessage, text: "" });
+            axios({
+                method: 'post',
+                url: process.env.REACT_APP_API + '/chat',
+                data: obj
+            })
+            .then(function (response) {
+                console.log(response);
+            });
         }
    }
+
+
   return (
       <Grid container>
           <Grid item xs={12}>
-            <Paper elevation={3}>
+            <Paper className="alignContent" elevation={3}>
                 <Typography variant="h2" gutterBottom>
                     Me chat
                 </Typography>
-                {messages && messages.map((message) => (
-                    <Grid container key={message.id}>
-                        <Grid item xs={1}>
-                            <Avatar >{message.user.substring(0,1)}</Avatar>
-                        </Grid>
-                        <Grid item xs={11}>
-                            <Typography variant="h6">
-                                {message.user + " " + message.time}
-                            </Typography>
-                            <Typography variant="subtitle1">
-                            {message.text}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                ))}
+                <div >{
+                    messages.map((message) => (
+                        <Message message={message} key={message.id}/>
+                    ))
+                }</div>
                 <Divider />
                 <TextField
                         id="new"
+                        fullWidth
                         label="Write something!"
                         value={newMessage.text || ""}
                         onChange={updateMessageText}
