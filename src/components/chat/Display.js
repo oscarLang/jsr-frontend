@@ -11,14 +11,17 @@ import {
   Chip,
   Avatar,
   TextField,
-  Divider
+  Divider,
+  Button
 } from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 import "./Display.css";
 import Message from "./Message"
 
 function Display({nick, socket}) {
     const [messages, addMessage] = React.useState([]);
+    const [numberOfOldMessages, changeNumberOfOld] = React.useState(5);
 
     const [newMessage, changeMessage] = React.useState({
       text: "",
@@ -53,6 +56,24 @@ function Display({nick, socket}) {
             addMessage(messages => [ ...messages, obj]);
         });
     }, [socket]);
+
+    function loadOldMessages(event) {
+        axios({
+            method: 'get',
+            url: process.env.REACT_APP_API + '/chat?skip=' + numberOfOldMessages + '&limit=5'
+        })
+        .then(function (response) {
+            console.log(response.data);
+            response.data.map(function(oldMessage) {
+                if (oldMessage._id) {
+                    oldMessage.id = oldMessage._id;
+                }
+                oldMessage.old = true;
+                addMessage(messages => [ oldMessage, ...messages]);
+            });
+        });
+        changeNumberOfOld(numberOfOldMessages + 5);
+    }
 
     function updateMessageText(event) {
         event.preventDefault();
@@ -89,6 +110,11 @@ function Display({nick, socket}) {
                 <Typography variant="h2" gutterBottom>
                     Me chat
                 </Typography>
+                <Button onClick={loadOldMessages}>
+                    <AutorenewIcon/>
+                    Load older messages
+                </Button>
+                <Divider />
                 <div >{
                     messages.map((message) => (
                         <Message message={message} key={message.id}/>
