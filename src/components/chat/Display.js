@@ -33,12 +33,11 @@ function Display({nick, socket}) {
         })
         .then(function (response) {
             console.log(response.data);
-            response.data.slice(0).reverse().map(function(oldMessage) {
+            response.data.map(function(oldMessage) {
                 if (oldMessage._id) {
                     oldMessage.id = oldMessage._id;
                 }
-                oldMessage.old = true;
-                addMessage(messages => [ ...messages, oldMessage]);
+                addMessage(messages => [ oldMessage, ...messages]);
             });
             let systemMessage = {
                 id: "newerMessages",
