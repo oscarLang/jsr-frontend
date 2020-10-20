@@ -4,8 +4,8 @@ import Display from "./Display";
 import Connect from "./Connect";
 
 import io from 'socket.io-client';
-const socket = io('http://localhost:8300');
-// const socket = io('https://chat.oscarlang.me');
+// const socket = io('http://localhost:8300');
+const socket = io('https://chat.oscarlang.me');
 
 
 function Chat() {
